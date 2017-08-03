@@ -220,9 +220,9 @@ A visualization of the original Nvidia model has been provided. Note that the ac
 To capture good driving behavior, I first recorded one lap on track 1 using center lane driving. Images from the left, right and center cameras were used. The steering measurements of the left and right images were offset by a value of 0.1 or 0.2 so that the car moves towards the centre of the road. Here is an example of left, center and right camera images and their corresponding steering measurements for an offset of 0.2:
 
 <p align="center">
-![alt text][image4] <div align="center">-0.03</div>
-![alt text][image5] <div align="center">-0.23</div>
-![alt text][image6] <div align="center">-0.43</div>
+![alt text][image4] 
+![alt text][image5] 
+![alt text][image6]
 </p>
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that recovery behaviors could be learned. The following images show the center camera images of start, middle and stop of a recovery behavior from the right edge of the road.
