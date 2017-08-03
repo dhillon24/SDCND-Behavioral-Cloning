@@ -271,10 +271,8 @@ The solution for the second phase of the project i.e. devising a model for track
 
 Please click on the images to see youtube videos of final driving results.
 
-<p align="center">
 [![Alt text](https://img.youtube.com/vi/MCxvOjnUyCE/0.jpg)](https://www.youtube.com/watch?v=MCxvOjnUyCE)
 
 [![Alt text](https://img.youtube.com/vi/aZBikAzYqvw/0.jpg)](https://www.youtube.com/watch?v=aZBikAzYqvw)
 
 [![Alt text](https://img.youtube.com/vi/6yZS8GH3NDw/0.jpg)](https://www.youtube.com/watch?v=6yZS8GH3NDw)
-</p>
