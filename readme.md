@@ -85,11 +85,15 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 An end-to-end learning system which has driving behavior as input in the form of images and outputs a steering angle prediction was to be designed. My first solution approach was to design a model based around the tried and tested Nvidia architecture which was developed for this task. The Nvidia model was successful in driving the car in straight lanes when trained on unbalanced training data but failed to negotiate curves very well. I realized that the problem may be that the network is biased to drive straight due to the nature of track 1. The histogram of the training data confirmed my hypothesis:
 
+<p align="center">
 ![alt text][image1]
+</p>
 
 I eventually realized that the network doesn't need more data but richer samples. So I balanced the histogram to a certain degree so that samples associated with high steering angles have more influence on the model and simultaneously the bias for low steering angles is curbed. The balanced histogram of the training data (obtained after data augmentation as well) is shown below. This balancing increased the sensitivity of the model to curves at the cost of slight oscillations about mean centre position. But nevertheless it was crucial for generalization of the model.
 
+<p align="center">
 ![alt text][image2]
+</p>
 
 Additionally, I experimented with dropout so that the network doesn't rely on all features it has detected to generate a steering output. However, introducing more than one dropout layers gave slower convergence and decreased the sensitivity to curves. Batch normalization was tried too, but somehow its inclusion saturated the decrease of the training loss. I also increased the receptive field of the convolutional layers using 3x3 filters across all layers but no discernible benefits were observed. 
 
@@ -207,34 +211,44 @@ The final model architectures for track 2 (jungle track) consisted of a convolut
 
 A visualization of the original Nvidia model has been provided. Note that the actual models used consisted of slight alterations to the original model as have been described above.
 
+<p align="center">
 ![alt text][image3]
+</p>
 
 *3. Creation of the Training Set & Training Process*
 
 To capture good driving behavior, I first recorded one lap on track 1 using center lane driving. Images from the left, right and center cameras were used. The steering measurements of the left and right images were offset by a value of 0.1 or 0.2 so that the car moves towards the centre of the road. Here is an example of left, center and right camera images and their corresponding steering measurements for an offset of 0.2:
 
+<p align="center">
 ![alt text][image4] <div align="center">-0.03</div>
 ![alt text][image5] <div align="center">-0.23</div>
 ![alt text][image6] <div align="center">-0.43</div>
+</p>
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that recovery behaviors could be learned. The following images show the center camera images of start, middle and stop of a recovery behavior from the right edge of the road.
 
+<p align="center">
 ![alt text][image7] <div align="center">-0.56</div>
 ![alt text][image8] <div align="center">-0.27</div>
 ![alt text][image9] <div align="center">0.00</div>
+</p>
 
 To augment the data sat, I also flipped images and angles as this seemingly offsets the bias for left turn driving for track 1 which has a majority of left turns. Images were darkened to simulate shadows which were rare in track 1 but are prominent in track 2. Cropping and normalization were also done as part of keras layers. All these operations are visualized below.
 
+<p align="center">
 ![alt text][image10] <div align="center">Original Image</div>
 ![alt text][image11] <div align="center">Flipped Image</div>
 ![alt text][image12] <div align="center">Darkened Image</div>
 ![alt text][image13] <div align="center">Cropped Image</div>
+</p>
 
 Finally after generating all these images I balanced the histogram as shown previously. The balancing scheme was such that if for each 0.1 interval between -1.0 and 1.0 (the steering range), 1500 samples were selected randomly from original and augmented samples. If an interval contained less than 1500 samples then all samples in that interval were selected. This lead to a formation of a representative dataset which was crucial for the driving performance achieved.  
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as poorer steering was observed when the number of epochs were increased beyond this. I used an adam optimizer so that manually training the learning rate wasn't necessary. Once the training and validation datasets were formed, a python generator was used to yield batches of training or validation data to the model. The model was trained multiple times due to random sampling and the best performing model was selected as the final model. In each run the model was trained on about only 10,000 samples but still the dataset captured a rich diversity of driving behavior as represented by the balanced histogram. The loss is visualized for one of the runs below:
 
+<p align="center">
 ![alt text][image14]
+</p>
 
 The solution for the second phase of the project i.e. devising a model for track 2 (jungle track) proceeded similarly except that now capturing recovery data for the most difficult parts of the track became even more important. Data augmentation by darkening images was not necessary as the track had plenty of shadows. The level of horizontal cropping was reduced to capture uphill or downhill climbs more efficiently and vertical cropping was increased to reduce the effect of extraneous landscape features on the drive. The number of epochs were increased to 10 to learn light braking checkpoints better and the model was trained on about 16,000 samples. Throttle control granted more stability to the car and better steering as well as the car's speed was always reasonable around curves, descents and climbs.
 
@@ -243,8 +257,10 @@ The solution for the second phase of the project i.e. devising a model for track
 
 Please click on the images to see youtube videos of final driving results.
 
+<p align="center">
 [![Alt text](https://img.youtube.com/vi/MCxvOjnUyCE/0.jpg)](https://www.youtube.com/watch?v=MCxvOjnUyCE)
 
 [![Alt text](https://img.youtube.com/vi/aZBikAzYqvw/0.jpg)](https://www.youtube.com/watch?v=aZBikAzYqvw)
 
 [![Alt text](https://img.youtube.com/vi/6yZS8GH3NDw/0.jpg)](https://www.youtube.com/watch?v=6yZS8GH3NDw)
+</p>
