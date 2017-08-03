@@ -221,11 +221,13 @@ To capture good driving behavior, I first recorded one lap on track 1 using cent
 
 <p align="center">
 <img src="./examples/left.jpg"> <br><div align="center">-0.03</div>
-<br>
+<br></p>
+<p align="center">
 <img src="./examples/center.jpg"><br><div align="center">-0.23</div>
-<br>
+<br></p>
+<p align="center">
 <img src="./examples/right.jpg"><br><div align="center">-0.43</div>
-</p>
+</p></p>
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that recovery behaviors could be learned. The following images show the center camera images of start, middle and stop of a recovery behavior from the right edge of the road.
 
