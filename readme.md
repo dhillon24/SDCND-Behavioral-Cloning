@@ -232,26 +232,36 @@ To capture good driving behavior, I first recorded one lap on track 1 using cent
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that recovery behaviors could be learned. The following images show the center camera images of start, middle and stop of a recovery behavior from the right edge of the road.
 
 <p align="center">
-![alt text][image7] <div align="center">-0.56</div>
-![alt text][image8] <div align="center">-0.27</div>
-![alt text][image9] <div align="center">0.00</div>
+<img src="./examples/recovery-1.jpg"> <br><div align="center">-0.56</div>
+<br></p>
+<p align="center">
+<img src="./examples/recovery-2.jpg"><br><div align="center">-0.27</div>
+<br></p>
+<p align="center">
+<img src="./examples/recovery-3.jpg"><br><div align="center">0.00</div>
 </p>
 
 To augment the data sat, I also flipped images and angles as this seemingly offsets the bias for left turn driving for track 1 which has a majority of left turns. Images were darkened to simulate shadows which were rare in track 1 but are prominent in track 2. Cropping and normalization were also done as part of keras layers. All these operations are visualized below.
 
 <p align="center">
-![alt text][image10] <div align="center">Original Image</div>
-![alt text][image11] <div align="center">Flipped Image</div>
-![alt text][image12] <div align="center">Darkened Image</div>
-![alt text][image13] <div align="center">Cropped Image</div>
-</p>
+<img src="./examples/image.jpg"> <br><div align="center">Original Image</div>
+<br></p>
+<p align="center">
+<img src="./examples/flipped-image.jpg"><br><div align="center">Flipped Image</div>
+<br></p>
+<p align="center">
+<img src="./examples/dark-image.jpg"><br><div align="center">Darkened Image</div>
+<br></p>
+<p align="center">
+<img src="./examples/cropped-image.jpg"><br><div align="center">Cropped Image</div>
+<br></p>
 
 Finally after generating all these images I balanced the histogram as shown previously. The balancing scheme was such that if for each 0.1 interval between -1.0 and 1.0 (the steering range), 1500 samples were selected randomly from original and augmented samples. If an interval contained less than 1500 samples then all samples in that interval were selected. This lead to a formation of a representative dataset which was crucial for the driving performance achieved.  
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as poorer steering was observed when the number of epochs were increased beyond this. I used an adam optimizer so that manually training the learning rate wasn't necessary. Once the training and validation datasets were formed, a python generator was used to yield batches of training or validation data to the model. The model was trained multiple times due to random sampling and the best performing model was selected as the final model. In each run the model was trained on about only 10,000 samples but still the dataset captured a rich diversity of driving behavior as represented by the balanced histogram. The loss is visualized for one of the runs below:
 
 <p align="center">
-![alt text][image14]
+<img src="./examples/figure_4.png">
 </p>
 
 The solution for the second phase of the project i.e. devising a model for track 2 (jungle track) proceeded similarly except that now capturing recovery data for the most difficult parts of the track became even more important. Data augmentation by darkening images was not necessary as the track had plenty of shadows. The level of horizontal cropping was reduced to capture uphill or downhill climbs more efficiently and vertical cropping was increased to reduce the effect of extraneous landscape features on the drive. The number of epochs were increased to 10 to learn light braking checkpoints better and the model was trained on about 16,000 samples. Throttle control granted more stability to the car and better steering as well as the car's speed was always reasonable around curves, descents and climbs.
