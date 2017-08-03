@@ -86,14 +86,12 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 An end-to-end learning system which has driving behavior as input in the form of images and outputs a steering angle prediction was to be designed. My first solution approach was to design a model based around the tried and tested Nvidia architecture which was developed for this task. The Nvidia model was successful in driving the car in straight lanes when trained on unbalanced training data but failed to negotiate curves very well. I realized that the problem may be that the network is biased to drive straight due to the nature of track 1. The histogram of the training data confirmed my hypothesis:
 
 <p align="center">
-<br><br>
 <img src="./examples/figure_1.png">
 </p>
 
 I eventually realized that the network doesn't need more data but richer samples. So I balanced the histogram to a certain degree so that samples associated with high steering angles have more influence on the model and simultaneously the bias for low steering angles is curbed. The balanced histogram of the training data (obtained after data augmentation as well) is shown below. This balancing increased the sensitivity of the model to curves at the cost of slight oscillations about mean centre position. But nevertheless it was crucial for generalization of the model.
 
 <p align="center">
-<br><br>
 <img src="./examples/figure_3.png">
 </p>
 
@@ -214,7 +212,6 @@ The final model architectures for track 2 (jungle track) consisted of a convolut
 A visualization of the original Nvidia model has been provided. Note that the actual models used consisted of slight alterations to the original model as have been described above.
 
 <p align="center">
-<br><br>
 <img src="./examples/nvidia-image.png">
 </p>
 
@@ -223,12 +220,11 @@ A visualization of the original Nvidia model has been provided. Note that the ac
 To capture good driving behavior, I first recorded one lap on track 1 using center lane driving. Images from the left, right and center cameras were used. The steering measurements of the left and right images were offset by a value of 0.1 or 0.2 so that the car moves towards the centre of the road. Here is an example of left, center and right camera images and their corresponding steering measurements for an offset of 0.2:
 
 <p align="center">
-<br><br>
-<img src="./examples/left.jpg"> <br><br><div align="center">-0.03</div>
-<br><br>
-<img src="./examples/center.jpg"><br><br> <div align="center">-0.23</div>
-<br><br>
-<img src="./examples/right.jpg"><br><br> <div align="center">-0.43</div>
+<img src="./examples/left.jpg"> <br><div align="center">-0.03</div>
+<br>
+<img src="./examples/center.jpg"><br><div align="center">-0.23</div>
+<br>
+<img src="./examples/right.jpg"><br><div align="center">-0.43</div>
 </p>
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that recovery behaviors could be learned. The following images show the center camera images of start, middle and stop of a recovery behavior from the right edge of the road.
