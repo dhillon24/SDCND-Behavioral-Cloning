@@ -30,7 +30,7 @@ The goals / steps of this project are the following:
 ---
 **Files Submitted & Code Quality**
 
-*1. Submission includes all required files and can be used to run the simulator in autonomous mode*
+*1. Files*
 
 My project includes the following files:
 * model.py containing the script to create and train the model for track 1 (lake track).
@@ -43,7 +43,7 @@ My project includes the following files:
 * supporting graphics and linked video files
 
 
-*2. Submission includes functional code*
+*2. Code*
 
 Using the Udacity provided simulator (version1 or version2) and drive.py or drive-throttle.py file, the car can be driven autonomously around the specified tracks by executing 
 ```sh
@@ -54,13 +54,11 @@ python drive.py model.h5
 python drive-throttle.py model-throttle.h5
 ```
 
-*3. Submission code is usable and readable*
-
 The model.py and model-throttle.py files contains the code for training and saving the convolution neural networks. The files shows the pipelines I used for training and validating the models, and it contains comments to explain how the code works.
 
 **Model Architecture and Training Strategy**
 
-*1. An appropriate model architecture has been employed*
+*1. Model Architecture*
 
 My model for the lake and mountain tracks consists of a convolution neural network based on the Nvidia's end-to-end steering architecture consisting of 5 convolutional layers with 5x5 and 3x3 filter sizes and depths between 24 and 64. The Nvidia model was chosen for its lower memory footprint than models with a higher number of parameters like VGG and its benchmarked performance in the given task of end-to-end steering angle prediction.   
 
