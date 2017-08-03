@@ -8,7 +8,7 @@ This repository contains starting files for the Behavioral Cloning Project.
 
 In this project, we will use  convolutional neural networks to clone driving behavior. We will train, validate and test a model using Keras. The model will output a steering angle to an autonomous vehicle.
 
-A simulator is used  a car around a track for data collection. We'll use image data and steering angles to train a neural network and then use this model to drive the car autonomously around the track.
+A simulator is used to drive a car around a track for data collection. We'll use image data and steering angles to train a neural network and then use this model to drive the car autonomously around the track.
 
 
 The Project
